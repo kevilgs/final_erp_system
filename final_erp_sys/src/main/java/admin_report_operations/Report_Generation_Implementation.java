@@ -1,4 +1,4 @@
-package report_generation;
+package admin_report_operations;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;

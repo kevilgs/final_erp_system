@@ -229,10 +229,10 @@ body {
 				<h4 class="text-center mb-4">Admin Panel</h4>
 				<ul class="nav flex-column">
 					<li class="nav-item"><a class="nav-link active"
-						href="admin_dash.jsp"> <i class="bi bi-speedometer2 me-2"></i>Dashboard
+						href="Admin_Dashboard"> <i class="bi bi-speedometer2 me-2"></i>Dashboard
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="user_management.jsp"> <i class="bi bi-people me-2"></i>User
+						href="UserManagement.jsp"> <i class="bi bi-people me-2"></i>User
 							Management
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -244,7 +244,7 @@ body {
 							Management
 					</a></li>
 					<li class="nav-item"><a class="nav-link "
-						href="feedback_management.jsp"> <i
+						href="feedback.jsp"> <i
 							class="bi bi-chat-dots me-2"></i>Feedback Management
 					</a></li>
 					<li class="nav-item"><a class="nav-link"

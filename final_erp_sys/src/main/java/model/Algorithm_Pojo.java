@@ -1,6 +1,6 @@
 package model;
 
-import algorithm.Algorithm_Implement;
+import admin_algorithm_operations.Algorithm_Implement;
 
 
 public class Algorithm_Pojo {

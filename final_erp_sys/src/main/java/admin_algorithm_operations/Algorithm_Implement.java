@@ -1,4 +1,4 @@
-package algorithm;
+package admin_algorithm_operations;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;

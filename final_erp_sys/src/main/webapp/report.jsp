@@ -169,7 +169,7 @@ body {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="user_management.jsp" >
+              <a class="nav-link" href="UserManagement.jsp" >
                 <i class="bi bi-people me-2"></i>User Management
               </a>
             </li>
@@ -184,7 +184,7 @@ body {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="feedback_management.jsp" >
+              <a class="nav-link" href="feedback.jsp" >
                 <i class="bi bi-chat-dots me-2"></i>Feedback Management
               </a>
             </li>

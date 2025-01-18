@@ -113,12 +113,12 @@
           <h4 class="text-center mb-4">Admin Panel</h4>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="admin_dash.jsp">
+              <a class="nav-link" href="Admin_Dashboard">
                 <i class="bi bi-speedometer2 me-2"></i>Dashboard
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="user_management.jsp">
+              <a class="nav-link" href="UserManagement.jsp">
                 <i class="bi bi-people me-2"></i>User Management
               </a>
             </li>
@@ -128,17 +128,17 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Algorithm_management.jsp">
+              <a class="nav-link" href="algorithm_montioring.jsp">
                 <i class="bi bi-people me-2"></i>Algorithm Management
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="feedback_management.jsp">
+              <a class="nav-link active" href="feedback.jsp">
                 <i class="bi bi-chat-dots me-2"></i>Feedback Management
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="report_management.jsp">
+              <a class="nav-link" href="Report_Generation">
                 <i class="bi bi-file-earmark-text me-2"></i>Report Management
               </a>
             </li>

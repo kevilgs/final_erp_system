@@ -1,4 +1,4 @@
-package algorithm;
+package admin_algorithm_operations;
 
 
 import model.Algorithm_Pojo;

@@ -21,7 +21,7 @@ public class FeedbackImp implements Feedback {
         return feedbackList;
       }
 
-      String sql = "SELECT * FROM feedback";
+      String sql = "SELECT * FROM demo_erp.feedback";
       try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
           ResultSet resultSet = preparedStatement.executeQuery()) {
 

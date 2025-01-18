@@ -1,6 +1,6 @@
 package model;
 
-import report_generation.Report_Generation_Implementation;
+import admin_report_operations.Report_Generation_Implementation;
 
 public class report_generation_pojo {
 	
