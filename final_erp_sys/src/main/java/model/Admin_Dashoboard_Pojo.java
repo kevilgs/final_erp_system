@@ -4,15 +4,15 @@ import admin_dashboard.Admin_Dashboard_Operations_Implement;
 
 public class Admin_Dashoboard_Pojo {
 	
-	private String jsonResult;
-
-	public String getJsonResult() {
-		return jsonResult;
-	}
-
-	public void setJsonResult(String jsonResult) {
-		this.jsonResult = jsonResult;
-	}
+//	private String jsonResult;
+//
+//	public String getJsonResult() {
+//		return jsonResult;
+//	}
+//
+//	public void setJsonResult(String jsonResult) {
+//		this.jsonResult = jsonResult;
+//	}
 
 	public String getsalestrendata(Admin_Dashoboard_Pojo pojo) {
 		

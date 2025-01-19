@@ -88,19 +88,51 @@ body {
             }
         }
 
-        function jsonToPDFMake(jsonArray, filename = "data.pdf") {
+        function jsonToPDFMake(jsonArray, algorithm, filename = "data.pdf") {
             if (!jsonArray || jsonArray.length === 0) return;
+
             try {
+                let tableBody = [];
+                let contentHeader = "Data Report";
+
+                // Customize based on algorithm
+                switch (algorithm) {
+                    case "abc":
+                        contentHeader = "ABC Classification Report";
+                        tableBody = [
+                            ["Category", "Item", "Value"], // Table header
+                            ...jsonArray.map(obj => [obj.category, obj.item, obj.value])
+                        ];
+                        break;
+
+                    case "salesTrend":
+                        contentHeader = "Sales Trend Report";
+                        tableBody = [
+                            ["Month", "Sales"], // Table header
+                            ...jsonArray.map(obj => [obj.month, obj.sales])
+                        ];
+                        break;
+
+                    case "productProfitability":
+                        contentHeader = "Product Profitability Report";
+                        tableBody = [
+                            ["Product", "Profitability"], // Table header
+                            ...jsonArray.map(obj => [obj.product, obj.profitability])
+                        ];
+                        break;
+
+                    default:
+                        tableBody = [
+                            Object.keys(jsonArray[0]),
+                            ...jsonArray.map(obj => Object.values(obj))
+                        ];
+                }
+
                 const documentDefinition = {
                     content: [
-                        { text: 'Data Report', style: 'header' },
+                        { text: contentHeader, style: 'header' },
                         {
-                            table: {
-                                body: [
-                                    Object.keys(jsonArray[0]),
-                                    ...jsonArray.map(obj => Object.values(obj))
-                                ]
-                            }
+                            table: { body: tableBody }
                         }
                     ],
                     styles: {
@@ -111,6 +143,7 @@ body {
                         }
                     }
                 };
+
                 pdfMake.createPdf(documentDefinition).download(filename);
             } catch (error) {
                 console.error("pdfMake Error:", error);

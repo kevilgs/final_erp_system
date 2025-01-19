@@ -3,6 +3,8 @@
 <%@ page import="com.google.gson.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.google.gson.reflect.TypeToken"%>
+<%@ page import="java.util.List" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +20,9 @@
 	crossorigin="anonymous" />
 
 <!-- Other head content -->
-<link
-	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css'
-	rel='stylesheet' />
-<script
-	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <style>
 body {
@@ -30,69 +30,158 @@ body {
 }
 
 .sidebar {
-	height: 100vh;
-	background-color: #2c3e50;
-	color: white;
-	padding-top: 20px;
-	position: fixed;
+    background-color: #3B1E54;
+    color: white;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
 }
 
 .sidebar .nav-link {
-	color: #ecf0f1;
-	transition: all 0.3s ease;
-	border-radius: 5px;
-	margin-bottom: 5px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: background 0.3s ease;
 }
 
 .sidebar .nav-link:hover, .sidebar .nav-link.active {
-	background-color: #34495e;
-	color: #fff;
+    background-color: #D4BEE4;
+    border-radius: 5px;
+    color: #EEEEEE;
 }
 
-.content-header {
-	background-color: #ecf0f1;
-	padding: 15px 20px;
-	border-bottom: 1px solid #bdc3c7;
+/* Cards Section */
+.cards-container {
+    display: flex;
+    gap: 1rem;
 }
 
-.main-content {
-	margin-left: 235px; /* Adjust according to the sidebar's width */
-	padding: 20px;
+.card {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    color: white;
+    flex: 1;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
-.btn-logout {
-	background-color: #e74c3c;
-	border-color: #c0392b;
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.btn-logout:hover {
-	background-color: #c0392b;
+.card i {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
 }
 
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Bright Color Variants */
+.total-revenue {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+}
+
+.total-users {
+    background: linear-gradient(135deg, #6a85b6, #bac8e0);
+}
+
+.total-products {
+    background: linear-gradient(135deg, #6decb9, #3cd28d);
+}
+
+/* Charts Section */
 .chart-container {
-	max-width: 100% px;
-	width: 100% px;
-	margin: 20px auto;
-	background: #fff;
-	border-radius: 8px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	padding: 20px;
+    background: #pink;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+/* Reduce Height of ABC Classification Chart */
+#abcChart {
+    max-height: 400px; /* Adjust as needed */
+    max-width: 100%;  /* Keep it responsive */
+}
+#demandForecastChart {
+    max-height: 300px; /* Adjust as needed */
+    max-width: 100%;  /* Keep it responsive */
+}
+#turnoverChart {
+    max-height: 250px; /* Adjust as needed */
+    max-width: 100%;  /* Keep it responsive */
 }
 
-.container-fluid {
-	padding: 0; /* Remove extra padding */
-	margin: 0; /* Ensure full-width layout */
+
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
 }
 
-#specific-chart-container {
-	max-width: 400px; /* Adjust the size */
-	margin: 0 auto; /* Optional: Center the chart */
+.table th {
+    font-weight: 600;
+    color: #495057;
 }
 
-#specific-chart-container canvas {
-	width: 100% !important; /* Ensure it resizes within the container */
-	height: auto !important; /* Maintain aspect ratio */
+/* Scrollbar styling */
+.table-responsive::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Class badge styles */
+.class-badge {
+    display: inline-block;
+    padding: 0.25em 0.75em;
+    font-size: 0.875em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.class-A {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.class-B {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.class-C {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
 </style>
 </head>
 <body>
@@ -148,6 +237,9 @@ body {
 			abcDataPoints.append("]");
 			
 			
+		    String productJson = (String) request.getAttribute("abc_classificationData");
+			
+			
 			
 		    String demandForecastData = (String) request.getAttribute("demandForecast"); // Replace with actual attribute
 		    JsonArray demandForecastArray = JsonParser.parseString(demandForecastData).getAsJsonArray();
@@ -192,105 +284,167 @@ body {
 		    String profitData = (String) request.getAttribute("profitability"); // Replace with actual attribute
 		    JsonObject profitJson = JsonParser.parseString(profitData).getAsJsonObject();
 
-		    JsonArray lowProfitProducts = profitJson.getAsJsonArray("LowProfitProducts");
-		    JsonArray highProfitProducts = profitJson.getAsJsonArray("HighProfitProducts");
+		    // Extract the top 5 products based on profit margin
+		    JsonArray allProfitProducts = profitJson.getAsJsonArray("AllProfitProducts");
+		    List<JsonObject> topProducts = new ArrayList<>();
+		    for (int i = 0; i < Math.min(5, allProfitProducts.size()); i++) {
+		        topProducts.add(allProfitProducts.get(i).getAsJsonObject());
+		    }
 
 		    // Prepare data for the chart
 		    StringBuilder productNames = new StringBuilder("[");
-		    StringBuilder lowProfitMargins = new StringBuilder("[");
-		    StringBuilder highProfitMargins = new StringBuilder("[");
+		    StringBuilder profitMargins = new StringBuilder("[");
 
-		    int productCount = Math.min(lowProfitProducts.size(), highProfitProducts.size()); // Ensure pairing
-
-		    for (int i = 0; i < productCount; i++) {
-		        JsonObject lowProduct = lowProfitProducts.get(i).getAsJsonObject();
-		        JsonObject highProduct = highProfitProducts.get(i).getAsJsonObject();
-
-		        productNames.append("'").append(lowProduct.get("ProductName").getAsString()).append(" vs ")
-		                     .append(highProduct.get("ProductName")).append("'");
-		        lowProfitMargins.append(lowProduct.get("ProfitMargin").getAsDouble());
-		        highProfitMargins.append(highProduct.get("ProfitMargin").getAsDouble());
-
-		        if (i < productCount - 1) {
+		    // Populate top 5 product data
+		    for (int i = 0; i < topProducts.size(); i++) {
+		        JsonObject product = topProducts.get(i);
+		        productNames.append("'").append(product.get("ProductName").getAsString()).append("'");
+		        profitMargins.append(product.get("ProfitMargin").getAsDouble());
+		        if (i < topProducts.size() - 1) {
 		            productNames.append(", ");
-		            lowProfitMargins.append(", ");
-		            highProfitMargins.append(", ");
+		            profitMargins.append(", ");
 		        }
 		    }
 
 		    productNames.append("]");
-		    lowProfitMargins.append("]");
-		    highProfitMargins.append("]");
+		    profitMargins.append("]");
+
+		    // Set these values as request attributes for dynamic rendering
+		    request.setAttribute("productNames", productNames.toString());
+		    request.setAttribute("profitMargins", profitMargins.toString());
+
 	%>
-	<div class="container-fluid">
-		<div class="row">
-			<!-- Sidebar -->
-			<nav class="col-md-3 col-lg-2 sidebar d-flex flex-column p-3">
-				<h4 class="text-center mb-4">Admin Panel</h4>
-				<ul class="nav flex-column">
-					<li class="nav-item"><a class="nav-link active"
-						href="Admin_Dashboard"> <i class="bi bi-speedometer2 me-2"></i>Dashboard
-					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="UserManagement.jsp"> <i class="bi bi-people me-2"></i>User
-							Management
-					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="product_management.jsp"> <i class="bi bi-box-seam me-2"></i>Product
-							Management
-					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="algorithm_monitoring.jsp"> <i class="bi bi-people me-2"></i>Algorithm
-							Management
-					</a></li>
-					<li class="nav-item"><a class="nav-link "
-						href="feedback.jsp"> <i
-							class="bi bi-chat-dots me-2"></i>Feedback Management
-					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="Report_Generation"> <i
-							class="bi bi-file-earmark-text me-2"></i>Report Management
-					</a></li>
-				</ul>
-			</nav>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 sidebar d-flex flex-column p-3">
+            <h4 class="text-center mb-4">Admin Panel</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link active" href="Admin_Dashboard">
+                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                    </a></li>
+                <li class="nav-item"><a class="nav-link" href="UserManagement.jsp">
+                        <i class="bi bi-people me-2"></i>User Management
+                    </a></li>
+                <li class="nav-item"><a class="nav-link" href="product_management.jsp">
+                        <i class="bi bi-box-seam me-2"></i>Product Management
+                    </a></li>
+                <li class="nav-item"><a class="nav-link" href="algorithm_monitoring.jsp">
+                        <i class="bi bi-cpu me-2"></i>Algorithm Management
+                    </a></li>
+                <li class="nav-item"><a class="nav-link" href="feedback.jsp">
+                        <i class="bi bi-chat-dots me-2"></i>Feedback Management
+                    </a></li>
+                <li class="nav-item"><a class="nav-link" href="Report_Generation">
+                        <i class="bi bi-file-earmark-text me-2"></i>Report Management
+                    </a></li>
+            </ul>
+        </nav>
 
-			<!-- Main Content -->
-			<div class="col-md-12 col-lg-12 p-0">
-				<!-- Header -->
-				<div
-					class="content-header d-flex justify-content-between align-items-center">
-					<h5 class="mb-0">Welcome, Admin</h5>
-				</div>
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10 p-4">
+            <!-- Cards Section -->
+            <div class="cards-container d-flex justify-content-between mb-4">
+                <!-- Total Revenue Card -->
+                <div class="card text-center total-revenue">
+                    <i class="bx bx-dollar-circle bx-lg"></i>
+                    <h3>Total Revenue</h3>
+                    <p>${request.getAttribute("totalRevenue")}</p>
+                </div>
 
-				<!-- Dynamic Content -->
-				<div class="main-content" id="main-content">
-					<div class="chart-container">
+                <!-- Total Users Card -->
+                <div class="card text-center total-users">
+                    <i class="bx bx-user bx-lg"></i>
+                    <h3>Total Users</h3>
+                    <p>${request.getAttribute("totalUsers")}</p>
+                </div>
+
+                <!-- Total Products Card -->
+                <div class="card text-center total-products">
+                    <i class="bx bx-box bx-lg"></i>
+                    <h3>Total Products</h3>
+                    <p>${request.getAttribute("totalProducts")}</p>
+                </div>
+            </div>
+
+				<!-- Charts Section -->
+				<div class="main-content row" id="main-content">
+					<!-- Monthly Sales Trend Analysis -->
+					<div class="col-12 chart-container mb-4">
 						<h2>Monthly Sales Trend Analysis</h2>
 						<canvas id="salesTrendChart"></canvas>
 					</div>
-					<div class="chart-container" id="specific-chart-container">
+
+					<!-- ABC Classification Analysis -->
+					<div class="col-md-6 chart-container mb-4">
 						<h2>ABC Classification Analysis</h2>
-						<canvas id="abcChart"> </canvas>
+						<canvas id="abcChart" style="width: 100%; height: 100px;"></canvas>
 					</div>
-					<div class="chart-container">
+
+					<!-- ABC Products Display Container -->
+					<div class="col-md-6 mb-4">
+						<div class="card shadow">
+							<div class="card-header bg-white border-bottom">
+								<div class="d-flex justify-content-between align-items-center">
+									<h3 class="h5 mb-0">Product Classification</h3>
+									<select id="abcClassFilter" class="form-select form-select-sm"
+										style="width: auto;">
+										<option value="all">All Classes</option>
+										<option value="A">Class A</option>
+										<option value="B">Class B</option>
+										<option value="C">Class C</option>
+									</select>
+								</div>
+							</div>
+							<div class="card-body p-0">
+								<div class="table-responsive"
+									style="max-height: 400px; overflow-y: auto;">
+									<table class="table table-hover mb-0">
+										<thead>
+											<tr class="bg-light">
+												<th class="position-sticky top-0 bg-light border-bottom"
+													style="z-index: 2;">ID</th>
+												<th class="position-sticky top-0 bg-light border-bottom"
+													style="z-index: 2;">Name</th>
+												<th class="position-sticky top-0 bg-light border-bottom"
+													style="z-index: 2;">Class</th>
+											</tr>
+										</thead>
+										<tbody id="abcProductList">
+											<!-- Loading placeholder -->
+											<tr>
+												<td colspan="3" class="text-center py-3">Loading
+													products...</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Demand Forecast -->
+					<div class="col-md-6 chart-container mb-4 ">
 						<h2>Demand Forecast</h2>
-						<canvas id="demandForecastChart"></canvas>
+						<canvas id="demandForecastChart" style="width: 100px;"></canvas>
 					</div>
-					<div class="chart-container">
+
+					<!-- Inventory Turnover Ratio -->
+					<div class="col-md-6 chart-container mb-4">
 						<h2>Inventory Turnover Ratio</h2>
 						<canvas id="turnoverChart"></canvas>
 					</div>
-					<div class="chart-container">
+
+					<!-- Product Profit Comparison -->
+					<div class="col-12 chart-container mb-4">
 						<h2>Product Profit Comparison</h2>
 						<canvas id="profitChart"></canvas>
 					</div>
-
-
 				</div>
 
 			</div>
-		</div>
-	</div>
+    </div>
+</div>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -306,7 +460,7 @@ body {
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 fill: true,
-                tension: 0.4
+                tension: 0
             }]
         },
         options: {
@@ -418,22 +572,16 @@ body {
         }
     });
     
+ // Initial Chart Rendering
     const profitCtx = document.getElementById('profitChart').getContext('2d');
-
-    // Create the grouped bar chart
-    const profitChart = new Chart(profitCtx, {
+    let profitChart = new Chart(profitCtx, {
         type: 'bar',
         data: {
-            labels: <%= productNames.toString() %>, // Dynamic product names
+            labels: <%= productNames %>, // Dynamic product names
             datasets: [
                 {
-                    label: 'Low Profit Products',
-                    data: <%= lowProfitMargins.toString() %>, // Dynamic low profit margins
-                    backgroundColor: '#ff6384'
-                },
-                {
-                    label: 'High Profit Products',
-                    data: <%= highProfitMargins.toString() %>, // Dynamic high profit margins
+                    label: 'Profit Margin (%)',
+                    data: <%= profitMargins %>, // Dynamic profit margins
                     backgroundColor: '#36a2eb'
                 }
             ]
@@ -446,14 +594,14 @@ body {
                 },
                 title: {
                     display: true,
-                    text: 'Profit Margin Comparison Between Products'
+                    text: 'Top 5 Products by Profit Margin'
                 }
             },
             scales: {
                 x: {
                     title: {
                         display: true,
-                        text: 'Product Comparison'
+                        text: 'Products'
                     }
                 },
                 y: {
@@ -466,13 +614,119 @@ body {
             }
         }
     });
-    
-    
-   
 
-    		
-    
-    
+    // Search Functionality
+    let searchInput = document.getElementById('searchInput');
+    let searchSuggestions = document.getElementById('searchSuggestions');
+
+    // Fetch product names for autocomplete
+    let productNamesList = <%= profitJson.getAsJsonArray("AllProfitProducts").toString() %>;
+
+    // Autocomplete Suggestions
+    searchInput.addEventListener('input', function () {
+        let query = searchInput.value.toLowerCase();
+        searchSuggestions.innerHTML = '';
+
+        if (query.length > 0) {
+            let suggestions = productNamesList.filter(product => 
+                product.ProductName.toLowerCase().includes(query)
+            );
+
+            suggestions.forEach(suggestion => {
+                let suggestionItem = document.createElement('div');
+                suggestionItem.textContent = suggestion.ProductName;
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.addEventListener('click', function () {
+                    addProductToChart(suggestion);
+                });
+                searchSuggestions.appendChild(suggestionItem);
+            });
+        }
+    });
+
+    // Add Product to Chart
+    function addProductToChart(product) {
+        // Replace the sixth product with the new selection
+        profitChart.data.labels[5] = product.ProductName;
+        profitChart.data.datasets[0].data[5] = product.ProfitMargin;
+
+        profitChart.update();
+    }
+
+ // Wait for the page to fully load
+    window.addEventListener('load', function() {
+    try {
+        const productList = document.getElementById('abcProductList');
+        const classFilter = document.getElementById('abcClassFilter');
+        
+        if (!productList || !classFilter) {
+            console.error('Required elements not found');
+            return;
+        }
+
+        // Get and parse the data
+        var rawData = `<%=request.getAttribute("abcData")%>`;
+        const productsData = JSON.parse(rawData);
+        
+        function displayProducts(selectedClass) {
+            if (!productList) return;
+            
+            // Clear current content
+            productList.innerHTML = '';
+            
+            const filteredProducts = selectedClass === 'all' 
+                ? productsData 
+                : productsData.filter(product => product['class'] === selectedClass);
+                
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="text-center py-3">No products found</td>
+                    </tr>
+                `;
+                return;
+            }
+                
+            // Create and append rows
+            filteredProducts.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="font-family: monospace;">${product.product}</td>
+                    <td>${product.name}</td>
+                    <td>
+                        <span class="class-badge class-${product['class']}">
+                            Class ${product['class']}
+                        </span>
+                    </td>
+                `;
+                productList.appendChild(row);
+            });
+
+            // Log the number of displayed products
+            console.log(`Displaying ${filteredProducts.length} products for class ${selectedClass}`);
+        }
+        
+        // Event listener for dropdown changes
+        classFilter.addEventListener('change', function(e) {
+            displayProducts(e.target.value);
+        });
+        
+        // Initial display
+        displayProducts('all');
+        
+    } catch (error) {
+        console.error('Error in ABC classification display:', error);
+        if (productList) {
+            productList.innerHTML = `
+                <tr>
+                    <td colspan="3" class="text-center text-danger py-3">
+                        Error loading products. Please refresh the page.
+                    </td>
+                </tr>
+            `;
+        }
+    }
+});
     
     </script>
 </body>

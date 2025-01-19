@@ -27,7 +27,10 @@ public class Admin_Dashboard extends HttpServlet {
 	     request.setAttribute("salesTrendData", salesTrendData);
 	     
 	     String abc_classificationData = pojo.getabclassificationdata(pojo);
+	     System.out.println(abc_classificationData);
 	     request.setAttribute("abc_classificationData", abc_classificationData);
+	     request.setAttribute("abcData", abc_classificationData);
+	     
 	     
 	     String demandForecast = pojo.getdemandforecastdata(pojo);
 	     System.out.println(demandForecast);
