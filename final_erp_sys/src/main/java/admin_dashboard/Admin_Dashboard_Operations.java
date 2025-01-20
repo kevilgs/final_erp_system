@@ -9,5 +9,8 @@ public interface Admin_Dashboard_Operations {
 	String getabclassificationdata(Admin_Dashoboard_Pojo pojo);
 	String getinvenotoryratio(Admin_Dashoboard_Pojo pojo);
 	String getproductprfotability(Admin_Dashoboard_Pojo pojo);
+	int gettotalrevenue(Admin_Dashoboard_Pojo pojo);
+	int gettotalusers(Admin_Dashoboard_Pojo pojo);
+	int gettotalproducts(Admin_Dashoboard_Pojo pojo);
 
 }

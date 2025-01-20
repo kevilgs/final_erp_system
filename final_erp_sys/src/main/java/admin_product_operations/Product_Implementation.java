@@ -5,23 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import db.GetConnection;
 import model.Product_Pojo;
 
 public class Product_Implementation implements Product_Interface {
 
-    @Override
-    public void addProduct(Product_Pojo product) {
+	public void addProduct(Product_Pojo product) {
         try {
-            CallableStatement cs = GetConnection.getConnection().prepareCall("{call demo_erp.AddProduct(?,?,?,?,?,?,?,?)}");
+            CallableStatement cs = db.GetConnection.getConnection().prepareCall("{call demo_erp.AddProduct(?,?,?,?,?,?,?,?)}");
             cs.setString(1, product.getP_Name());
             cs.setString(2, product.getP_Category());
             cs.setDouble(3, product.getP_Cost());
             cs.setDouble(4, product.getP_SellingPrice());
             cs.setInt(5, product.getP_Stock());
             cs.setInt(6, product.getP_ReorderLevel());
-            cs.setString(7, product.getP_SupplierInfo());
+            cs.setString(7, product.getP_SupplierInfo());  // No more JSON conversion needed
             cs.setDate(8, product.getP_ExpiryDate());
             cs.execute();
         } catch (Exception e) {
@@ -33,7 +30,7 @@ public class Product_Implementation implements Product_Interface {
     public List<Product_Pojo> getAllProducts() {
         List<Product_Pojo> productList = new ArrayList<>();
         try {
-            ResultSet rs = GetConnection.getConnection().createStatement().executeQuery("Select * from products;");
+            ResultSet rs = db.GetConnection.getConnection().createStatement().executeQuery("Select * from products;");
             while (rs.next()) {
                 Product_Pojo product = new Product_Pojo();
                 product.setId(rs.getInt("ProductID"));
@@ -61,7 +58,7 @@ public class Product_Implementation implements Product_Interface {
         Product_Pojo product = null;
         try {
             String query = "SELECT * FROM products WHERE ProductID = ?";
-            PreparedStatement ps = GetConnection.getConnection().prepareStatement(query);
+            PreparedStatement ps = db.GetConnection.getConnection().prepareStatement(query);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -85,7 +82,7 @@ public class Product_Implementation implements Product_Interface {
     @Override
     public void updateProduct(Product_Pojo product) {
         try {
-            CallableStatement cs = GetConnection.getConnection()
+            CallableStatement cs = db.GetConnection.getConnection()
                     .prepareCall("{call demo_erp.EditProduct(?,?,?,?,?,?,?,?,?)}");
             cs.setInt(1, product.getId());
             cs.setString(2, product.getP_Name());
@@ -105,7 +102,7 @@ public class Product_Implementation implements Product_Interface {
     @Override
     public void deleteProduct(int id) {
         try {
-            CallableStatement cs = GetConnection.getConnection().prepareCall("{call demo_erp.deleteProduct(?)}");
+            CallableStatement cs = db.GetConnection.getConnection().prepareCall("{call demo_erp.deleteProduct(?)}");
             cs.setInt(1, id);
             cs.execute();
         } catch (Exception e) {

@@ -16,7 +16,7 @@ public class FeedbackServlet extends HttpServlet {
 
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<FeedbackPojo> feedbackList = FeedbackPojo.getAllFeedbackFromDatabase();
+        List<FeedbackPojo> feedbackList = FeedbackPojo.getAllFeedback();
         req.setAttribute("feedbackList", feedbackList);
         req.getRequestDispatcher("feedback.jsp").forward(req, resp);
     }

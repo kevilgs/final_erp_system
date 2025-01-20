@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 			
 			if ("Authentication Successful!".equals(result) ) {
 				
-				response.sendRedirect("browse.jsp");
+				response.sendRedirect("Home.jsp");
 				
 			}else {
 				request.getRequestDispatcher("login.jsp").forward(request, response);

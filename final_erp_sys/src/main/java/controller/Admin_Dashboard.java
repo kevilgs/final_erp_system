@@ -42,6 +42,16 @@ public class Admin_Dashboard extends HttpServlet {
 	     String profitability = pojo.getproductprofitability(pojo);
 	     request.setAttribute("profitability", profitability);
 	     
+	     int revenue = pojo.gettoalrevenue(pojo);
+	     request.setAttribute("totalRevenue", revenue);
+	     System.out.println(revenue);
+	     
+	     int users = pojo.gettoalusers(pojo);
+	     request.setAttribute("totalUsers", users);
+	     
+	     int products = pojo.gettoalproducts(pojo);
+	     request.setAttribute("totalProducts", products);
+	     
 	     request.getRequestDispatcher("admin_dash.jsp").forward(request, response);
 	     
 

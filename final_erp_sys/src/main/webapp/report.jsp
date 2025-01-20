@@ -11,6 +11,9 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -23,23 +26,26 @@ body {
 }
 
 .sidebar {
-	height: 100vh;
-	background-color: #2c3e50;
+	background-color: #3B1E54;
 	color: white;
-	padding-top: 20px;
+	height: 100vh;
+	position: sticky;
+	top: 0;
+	overflow-y: auto;
 	position: fixed;
 }
 
 .sidebar .nav-link {
-	color: #ecf0f1;
-	transition: all 0.3s ease;
-	border-radius: 5px;
-	margin-bottom: 5px;
+	color: white;
+	font-size: 16px;
+	margin-bottom: 10px;
+	transition: background 0.3s ease;
 }
 
 .sidebar .nav-link:hover, .sidebar .nav-link.active {
-	background-color: #34495e;
-	color: #fff;
+	background-color: #D4BEE4;
+	border-radius: 5px;
+	color: #EEEEEE;
 }
 
 .content-header {
@@ -191,50 +197,39 @@ body {
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-md-3 col-lg-2 sidebar d-flex flex-column p-3">
-          <h4 class="text-center mb-4">Admin Panel</h4>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="Admin_Dashboard" >
-                <i class="bi bi-speedometer2 me-2"></i>Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="UserManagement.jsp" >
-                <i class="bi bi-people me-2"></i>User Management
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="product_management.jsp" >
-                <i class="bi bi-box-seam me-2"></i>Product Management
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="algorithm_monitoring.jsp">
-                <i class="bi bi-people me-2"></i>Algorithm Management
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="feedback.jsp" >
-                <i class="bi bi-chat-dots me-2"></i>Feedback Management
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="Report_Generation" >
-                <i class="bi bi-file-earmark-text me-2"></i>Report Management
-              </a>
-            </li>
-          </ul>
-        </nav>
+     <div class="row">
+			<!-- Sidebar -->
+			<nav class="col-md-3 col-lg-2 sidebar d-flex flex-column p-3">
+				<h4 class="text-center mb-4">Admin Panel</h4>
+				<ul class="nav flex-column">
+					<li class="nav-item"><a class="nav-link"
+						href="Admin_Dashboard"> <i class="bi bi-speedometer2 me-2"></i>Dashboard
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="UserManagement.jsp"> <i class="bi bi-people me-2"></i>User
+							Management
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="product_management.jsp"> <i class="bi bi-box-seam me-2"></i>Product
+							Management
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="algorithm_monitoring.jsp"> <i class="bi bi-cpu me-2"></i>Algorithm
+							Management
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="feedback.jsp">
+							<i class="bi bi-chat-dots me-2"></i>Feedback Management
+					</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="Report_Generation"> <i
+							class="bi bi-file-earmark-text me-2"></i>Report Management
+					</a></li>
+				</ul>
+			</nav>
 
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-0">
-          <!-- Header -->
-          <div class="content-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Welcome, Admin</h5>
-          </div>
+        <div class="col-12">
+          
 
           <!-- Report Generation Section -->
           <div class="main-content" id="main-content">

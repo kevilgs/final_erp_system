@@ -1,8 +1,12 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-
-import admin_feedback_operations.FeedbackImp;
+import db.GetConnection2;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class FeedbackPojo {
     // Private fields
@@ -44,8 +48,36 @@ public class FeedbackPojo {
         this.timestamp = timestamp;
     }
     
-    public static List<FeedbackPojo > getAllFeedbackFromDatabase() {
-        FeedbackImp feedbackImpl = new FeedbackImp(); // Create instance inside the method
-        return feedbackImpl.getAllFeedback();
+    // Method to get all feedback
+    public static List<FeedbackPojo> getAllFeedback() {
+        List<FeedbackPojo> feedbackList = new ArrayList<>();
+        
+        try (Connection connection = GetConnection2.getConnection()) {
+            if (connection == null) {
+                System.out.println("Database connection failed!");
+                return feedbackList;
+           
+            }
+            System.out.println(feedbackList);
+            
+            String sql = "SELECT * FROM feedback";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                
+                while (resultSet.next()) {
+                    FeedbackPojo feedback = new FeedbackPojo();
+                    feedback.setCustomerId(resultSet.getInt("CustomerID"));
+                    feedback.setComments(resultSet.getString("Comments"));
+                    feedback.setRatings(resultSet.getInt("Ratings"));
+                    feedback.setTimestamp(resultSet.getString("Timestamp"));
+                    feedbackList.add(feedback);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching feedback: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return feedbackList;
     }
 }
