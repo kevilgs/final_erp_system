@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="model.UserFeedbackPojo" %>
+<%@ page import="model.FeedbackPojo" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -127,7 +127,7 @@
 						href="algorithm_monitoring.jsp"> <i class="bi bi-cpu me-2"></i>Algorithm
 							Management
 					</a></li>
-					<li class="nav-item"><a class="nav-link active" href="feedback.jsp">
+					<li class="nav-item"><a class="nav-link active" href="FeedbackServlet">
 							<i class="bi bi-chat-dots me-2"></i>Feedback Management
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -161,10 +161,10 @@
               <tbody>
                 <%
                 // Fetch feedback list from request attribute (passed from servlet)
-                                  List<UserFeedbackPojo> feedbackList = (List<UserFeedbackPojo>) request.getAttribute("feedbackList");
+                                  List<FeedbackPojo> feedbackList = (List<FeedbackPojo>) request.getAttribute("feedbackList");
                                   if (feedbackList != null && !feedbackList.isEmpty()) {
                                     for (int i = 0; i < feedbackList.size(); i++) {
-                                      UserFeedbackPojo feedback = feedbackList.get(i);
+                                      FeedbackPojo feedback = feedbackList.get(i);
                 %>
                   <tr>
                     <td><%=i + 1%></td>
@@ -195,7 +195,7 @@
                 
                 <%// Loop through feedback list and count ratings
                   if (feedbackList != null && !feedbackList.isEmpty()) {
-                    for (UserFeedbackPojo feedback : feedbackList) {
+                    for (FeedbackPojo feedback : feedbackList) {
                       int rating = feedback.getRatings();
                       out.println("ratingsCount[" + (rating - 1) + "]++;");
                     }

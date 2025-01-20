@@ -217,7 +217,7 @@ body {
 						href="algorithm_monitoring.jsp"> <i class="bi bi-cpu me-2"></i>Algorithm
 							Management
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="feedback.jsp">
+					<li class="nav-item"><a class="nav-link" href="FeedbackServlet">
 							<i class="bi bi-chat-dots me-2"></i>Feedback Management
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
